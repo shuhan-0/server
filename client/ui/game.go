@@ -89,8 +89,8 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 func (g *Game) drawDeveloperInfo(screen *ebiten.Image) {
 	ebitenutil.DebugPrintAt(screen, "shuhan-0", 100, 100)
-	ebitenutil.DebugPrintAt(screen, "Version: 1.0（可能以后也不更新）", 100, 130)
-	ebitenutil.DebugPrintAt(screen, "我的github地址：https://github.com/shuhan-0/", 100, 190)
+	ebitenutil.DebugPrintAt(screen, "Version: 1.0", 100, 130)
+	ebitenutil.DebugPrintAt(screen, "github：https://github.com/shuhan-0/", 100, 160)
 	ebitenutil.DebugPrintAt(screen, "Press ESC to return to menu", 100, 190)
 }
 
