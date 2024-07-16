@@ -1,0 +1,79 @@
+version: '3.8'
+
+networks:
+  snake-game-network:  # 定义一个自定义网络
+    driver: bridge
+
+services:
+  server:
+    build:
+      context: ..
+      dockerfile: docker/server/Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+      - redis
+      - kafka
+    environment:
+      - CONFIG_PATH=config.yaml
+    networks:
+      - snake-game-network  # 将服务连接到自定义网络
+
+  logingate:
+    build:
+      context: ..
+      dockerfile: docker/logingate/Dockerfile
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mysql
+      - redis
+    environment:
+      - CONFIG_PATH=config.yaml
+    networks:
+      - snake-game-network  # 将服务连接到自定义网络
+
+  mysql:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: snakegame
+    volumes:
+      - mysql-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - snake-game-network  # 将服务连接到自定义网络
+
+  redis:
+    image: redis:6
+    ports:
+      - "6379:6379"
+    networks:
+      - snake-game-network  # 将服务连接到自定义网络
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    networks:
+      - snake-game-network  # 将服务连接到自定义网络
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+    ports:
+      - "2181:2181"
+    networks:
+      - snake-game-network  # 将服务连接到自定义网络
+
+volumes:
+  mysql-data:

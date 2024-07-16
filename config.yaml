@@ -1,0 +1,11 @@
+server_address: "0.0.0.0:8080"
+login_gate_address: "0.0.0.0:8081"
+database_url: "root:rootpassword@tcp(mysql:3306)/snakegame"
+redis_url: "redis:6379"
+kafka_url:
+  - "kafka:9092"
+cluster_nodes:
+  - "server1:8080"
+  - "server2:8080"
+  - "server3:8080"
+worker_pool_size: 10
