@@ -68,43 +68,6 @@ snake-game/
 │   └── start_servers.sh
 ├── go.mod
 ├── go.sum
-snake-game/
-│
-├── cmd/
-│   └── client/
-│       └── main.go
-├── client/
-│   ├── assets/
-│   │   ├── images/
-│   │   └── sounds/
-│   ├── network/
-│   │   └── client.go
-│   └── ui/
-│       ├── game.go
-│       ├── game_window.go
-│       └── menu.go
-├── docker/
-│   ├── logingate/
-│   │   └── Dockerfile
-│   └── server/
-│       └── Dockerfile
-├── internal/
-│   ├── game/
-│   │   ├── game.go
-│   │   ├── player.go
-│   │   └── snake.go
-│   └── network/
-│       ├── connection.go
-│       └── server.go
-├── pkg/
-│   └── config/
-│       └── config.go
-├── scripts/
-│   ├── start_client.sh
-│   └── start_servers.sh
-├── go.mod
-├── go.sum
-└── config.yaml
 ```
 
 
